@@ -4,6 +4,6 @@ import {Component} from 'angular2/core';
     selector: 'my-button',
     template: '<button>This is a button</button>'
 })
-export class ButtonComponent { 
+export class SpecialButtonComponent { 
     
 }

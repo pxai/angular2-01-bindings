@@ -18,19 +18,46 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
+            //import {AppComponent} from './app.button'
+            /**
+             * class binding
+             * CSS binding
+             * events binding
+             * manual 2way binding
+             * angular2 2 way binding
+             */
             // Different kinds of interpolation
             // Notice textContent is a dom element
             AppComponent = (function () {
                 function AppComponent() {
-                    this.title = 'Angular2 00 Hello App';
-                    this.subtitle = 'Angular2 is... so different';
-                    this.logo = 'https://avatars0.githubusercontent.com/u/139426?v=3&s=400';
-                    this.angularSite = 'https://angularjs.org/';
+                    this.title = 'Binding samples';
+                    this.topicText = 'Some samples for binding';
+                    this.isActive = true;
+                    this.buttonTitle = '';
+                    this.otherTitle = 'Two way binding';
+                    this.yetAnotherBind = 'yet another two way binding';
+                    this.heartOn = false;
                 }
+                AppComponent.prototype.toggleCss = function () {
+                    this.isActive = !this.isActive;
+                };
+                AppComponent.prototype.toggleCssEvent = function ($event) {
+                    // Prevent Bubbling, in case that we are insie other element
+                    // expecting clic
+                    $event.stopPropagation();
+                    this.isActive = !this.isActive;
+                };
+                AppComponent.prototype.clearTitle = function ($event) {
+                    $event.preventDefault();
+                    this.buttonTitle = '';
+                };
+                AppComponent.prototype.heartBeat = function () {
+                    this.heartOn = !this.heartOn;
+                };
                 AppComponent = __decorate([
                     core_1.Component({
-                        selector: 'my-app',
-                        template: "<h1>{{title}}</h1>\n                <h2 [textContent]='subtitle'></h2>\n                <img bind-src=\"logo\">\n                <a bind-href=\"angularSite\">Angular site</a>\n            "
+                        selector: 'bindings-app',
+                        template: "<section>\n                <h1>{{title}}</h1>\n                <p [textContent]='topicText'></p>\n                <div><button class=\"btn btn-primary\" [class.active]=\"isActive\">Do something</button></div>\n                <div><button class=\"btn btn-primary\" \n                    [style.backgroundColor]=\"isActive ? 'green' : 'grey'\">CSS binding</button>\n\n                </div>\n                <div><button (click)=\"toggleCss()\">Toggle</button></div>\n                <div><button on-click=\"toggleCssEvent($event)\">Toggle</button></div>\n                <div>\n                    <input type=\"text\" [value]=\"buttonTitle\" (input)=\"buttonTitle = $event.target.value\" />\n                    <a href='' (click)=\"clearTitle($event)\">Clear</a>\n                    <b>{{buttonTitle}}</b>\n                </div>\n                <div>\n                    <input type=\"text\" [(ngModel)]=\"otherTitle\" />\n                    <i>{{otherTitle}}</i>\n                </div>\n                <div>\n                    <input type=\"text\" bindon-ngModel=\"yetAnotherBind\" />\n                    <i>{{yetAnotherBind}}</i>\n                </div>\n                <div>\n                    <h3><i class=\"glyphicon\"\n                       [class.glyphicon-heart-empty] = \"!heartOn\"\n                       [class.glyphicon-heart] = \"heartOn\"\n                       [style.color] = \"heartOn ? 'red' : 'none' \"\n                       (click)=\"heartBeat()\">\n                    </i> Beat Me!</h3>\n                </div>\n               </section>\n            "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
