@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 //import {AppComponent} from './app.button'
 
 /**
@@ -60,14 +60,14 @@ export class AppComponent {
     }
    
    
-    public toggleCssEvent ($event) : void {
+    public toggleCssEvent ($event: any) : void {
         // Prevent Bubbling, in case that we are insie other element
         // expecting clic
         $event.stopPropagation();
         this.isActive = !this.isActive;
     } 
     
-    public clearTitle ($event) {
+    public clearTitle ($event: any) {
         $event.preventDefault();
         this.buttonTitle = '';
     }
